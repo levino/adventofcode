@@ -1,0 +1,28 @@
+{
+  "name": "Node.js & TypeScript",
+  "image": "mcr.microsoft.com/devcontainers/typescript-node:1-22-bookworm",
+  "features": {
+    "ghcr.io/devcontainers/features/common-utils:2": {},
+    "ghcr.io/devcontainers-community/features/deno:1": {
+      "version": "2.0.0"
+    }
+  },
+  "postCreateCommand": "npm install",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "unifiedjs.vscode-mdx",
+        "denoland.vscode-deno",
+        "streetsidesoftware.code-spell-checker",
+        "astro-build.astro-vscode",
+        "bradlc.vscode-tailwindcss",
+        "streetsidesoftware.code-spell-checker-german"
+      ],
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "zsh",
+        "editor.defaultFormatter": "denoland.vscode-deno",
+        "deno.enable": true
+      }
+    }
+  }
+}
