@@ -1,9 +1,13 @@
 import { assertEquals } from 'jsr:@std/assert'
 
-import { distance } from './01.ts'
+import { distance, similarity } from './01.ts'
 
 Deno.test('distance', () => {
-  assertEquals(distance(list), undefined)
+  assertEquals(distance(list), 2756096)
+})
+
+Deno.test('similarity', () => {
+  assertEquals(similarity(list), 23117829)
 })
 
 const list = `17633   15737
