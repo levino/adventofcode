@@ -1,12 +1,7 @@
 import { filter, fold, map, sort, zip } from 'jsr:@baetheus/fun/array'
-import { flow, pipe, tap } from 'jsr:@baetheus/fun/fn'
+import { flow, pipe } from 'jsr:@baetheus/fun/fn'
 import { replace, split } from 'jsr:@baetheus/fun/string'
 import { add, SortableNumber } from 'jsr:@baetheus/fun/number'
-
-const log = <T>(value: T) => {
-  console.log(value)
-  return value
-}
 
 export const distance = (list: string) =>
   pipe(
