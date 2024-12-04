@@ -1,12 +1,20 @@
 import { split } from 'jsr:@baetheus/fun/string'
 import { flow, pipe } from 'jsr:@baetheus/fun/fn'
-import { fold, map } from 'jsr:@baetheus/fun/array'
+import { deleteAt, fold, map } from 'jsr:@baetheus/fun/array'
 
 export const numberOfSafeReports = (input: string) =>
   pipe(
     input,
     parseReports,
     checkValidity,
+    countValids,
+  )
+
+export const numberOfSafeReportsWithDampener = (input: string) =>
+  pipe(
+    input,
+    parseReports,
+    checkValidityWithDampener,
     countValids,
   )
 
@@ -59,4 +67,15 @@ const checkValidity = (reports: readonly (readonly number[])[]) =>
         ),
     ),
   )
+
+const checkValidityWithDampener = (reports: readonly (readonly number[])[]) =>
+  pipe(
+    reports,
+    map(
+      (report) => map((_, index) => deleteAt(index)(report))(report),
+    ),
+    map(checkValidity),
+    map(fold((acc, value) => acc || value, false)),
+  )
+
 const parseReports = flow(split('\n'), map(flow(split(' '), map(parseFloat))))

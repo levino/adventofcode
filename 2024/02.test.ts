@@ -1,8 +1,12 @@
 import { assertEquals } from '@std/assert/equals'
-import { numberOfSafeReports } from './02.ts'
+import { numberOfSafeReports, numberOfSafeReportsWithDampener } from './02.ts'
 
 Deno.test('numberOfSafeReports', () => {
   assertEquals(numberOfSafeReports(reports), 663)
+})
+
+Deno.test('numberOfSafeReportsWithDampener', () => {
+  assertEquals(numberOfSafeReportsWithDampener(reports), 692)
 })
 
 const reports = `45 47 48 50 51 52 54 51
