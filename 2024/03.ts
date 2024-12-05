@@ -1,22 +1,18 @@
 import { fold, map, sequence } from 'jsr:@baetheus/fun/array'
-import { pipe } from 'jsr:@baetheus/fun/fn'
-import { match } from 'jsr:@baetheus/fun/string'
+import { flow, pipe } from 'jsr:@baetheus/fun/fn'
+import { match, split } from 'jsr:@baetheus/fun/string'
 import * as O from 'jsr:@baetheus/fun/option'
-
+import { head, tail } from 'npm:ramda'
 const muls = match(/mul\(\d*,\d*\)/g)
 const mulValues = match(/mul\((\d*),(\d*)\)/)
 
-const removeDisabled = (input: string) =>
-  input.split("don't()").reduce((acc, entry, index) => {
-    if (index === 0) {
-      return [entry]
-    }
-    const [, ...does] = entry.split('do()')
-    return [
-      ...acc,
-      ...does,
-    ]
-  }, [] as string[]).join('')
+const removeDisabled = (
+  input: string,
+) =>
+  [
+    head(input.split("don't()")),
+    tail(input.split("don't()")).map(flow(split('do()'), tail)),
+  ].join('')
 
 export const calculateProduct = (input: string) =>
   pipe(
